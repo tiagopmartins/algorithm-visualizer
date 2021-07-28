@@ -2,7 +2,7 @@
 
 A website deidicated to an intuitive, simple and clean `algorithm vizualizer` for pathfinding algorithms.
 
-## Algortihms
+## Algorithms
 
 On this website, it is possible to see in action and learn about the following algorithms:
 - A* search;
