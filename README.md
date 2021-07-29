@@ -1,7 +1,3 @@
-# Algorithm vizualizer
-
-A website deidicated to an intuitive, simple and clean `algorithm vizualizer` for pathfinding algorithms.
-
 ## Algorithms
 
 On this website, it is possible to see in action and learn about the following algorithms:
