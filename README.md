@@ -1,6 +1,6 @@
-# Algorithm vizualizer
+# Algorithm visualizer
 
-A website deidicated to an intuitive, simple and clean `algorithm vizualizer` for pathfinding algorithms.
+A website deidicated to an intuitive, simple and clean `algorithm visualizer` for pathfinding algorithms.
 
 ## Algorithms
 
