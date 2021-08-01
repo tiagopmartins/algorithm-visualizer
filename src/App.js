@@ -11,7 +11,7 @@ function App() {
   document.title = TITLE;
 
   // State regarding the algorithm in use
-  const [algorithmInUse, setAlgorithmInUse] = useState(Algorithms["None"]);
+  const [algorithmInUse, setAlgorithmInUse] = useState(Algorithms["A_Star"]);
 
   return (
     <div className="App">

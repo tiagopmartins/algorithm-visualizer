@@ -1,8 +1,5 @@
 // Dictionary with the algorithms information
 export const Algorithms = {
-    None: {
-        name: "Select an algorithm!"
-    },
     A_Star: {
         name: "A* Search"
     },
