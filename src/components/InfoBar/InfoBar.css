@@ -9,7 +9,7 @@
 
 .infobar-menu {
     display: grid;
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(5, auto);
     grid-column-gap: 4rem;
     list-style: none;
     text-align: center;

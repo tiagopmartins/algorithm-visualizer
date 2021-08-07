@@ -5,6 +5,7 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(68, auto);
+    grid-template-columns: repeat(72, auto);
     list-style: none;
+    padding-top: 0.8rem;
 }

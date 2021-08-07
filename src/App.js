@@ -9,9 +9,9 @@ import AlgorithmVisualizer from "./AlgorithmVisualizer/AlgorithmVisualizer"
 // Website title
 const TITLE = "AlgoVis";
 // Height of the visualizer (in squares).
-const VIS_HEIGHT = 27;
-// Width of the visuazlier (in squares).
-const VIS_WIDTH = 45;
+const VIS_HEIGHT = 33;
+// Width of the visualizer (in squares).
+const VIS_WIDTH = 72;
 
 function App() {
   document.title = TITLE;

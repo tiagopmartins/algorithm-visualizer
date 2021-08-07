@@ -20,6 +20,9 @@ function NavBar(props) {
                 {dropdown && <Dropdown setAlgorithmInUse={props.setAlgorithmInUse}/>}
             </li>
             <li key="1">
+                <a className="navbar-el" href="">Help</a>
+            </li>
+            <li key="2">
                 <a className="navbar-el" href="https://github.com/tiagopmartins/algorithm-visualizer">GitHub</a>
             </li>
         </ul>
