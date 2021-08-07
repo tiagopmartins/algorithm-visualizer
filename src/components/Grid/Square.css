@@ -1,0 +1,13 @@
+.square {
+    color: white;
+    border-color: black;
+    border-style: solid;
+    border-width: thin;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.square:hover {
+    color: rgb(165, 165, 165);
+    transition: all 0.2s ease-out;
+}

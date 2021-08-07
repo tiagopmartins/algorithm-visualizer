@@ -1,7 +1,7 @@
 import "./Dropdown.css"
 import React, { useState } from "react"
 import { DropdownItems } from "./DropdownItems"
-import { Algorithms } from "../../Algorithms/Algorithms"
+import { AlgorithmsInfo } from "../../Algorithms/AlgorithmsInfo"
 
 function Dropdown(props) {
     const [clicked, setClicked] = useState(false);
@@ -16,9 +16,9 @@ function Dropdown(props) {
                     return <li key={index}>
                         <a className={item.className} onClick={() => {
                             setClicked(false);
-                            props.setAlgorithmInUse(Algorithms[item.key]);
+                            props.setAlgorithmInUse(AlgorithmsInfo[item.key]);
                         }}>
-                            {Algorithms[item.key].name}
+                            {AlgorithmsInfo[item.key].name}
                         </a>
                     </li>
                 })}

@@ -1,0 +1,10 @@
+.visualizer {
+    display: flex;
+    justify-content: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(68, auto);
+    list-style: none;
+}

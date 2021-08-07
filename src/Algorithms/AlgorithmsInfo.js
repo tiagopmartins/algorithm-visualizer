@@ -1,5 +1,5 @@
 // Dictionary with the algorithms information
-export const Algorithms = {
+export const AlgorithmsInfo = {
     A_Star: {
         name: "A* Search"
     },
