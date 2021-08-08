@@ -11,7 +11,7 @@ const RED = 1;
 // End node state.
 const GREEN = 2;
 // Wall node state.
-const BLACK = 4;
+const BLACK = 3;
 
 // Node class to represent a node in a graph.
 class Node {

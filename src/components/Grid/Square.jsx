@@ -12,16 +12,28 @@ class Square extends Component {
      *
      * @param row Square row.
      * @param col Square column.
+     * @param pos Position of the HTML element on the HTML collection return by
+     *            "getElementsByClassName".
      */
     constructor(props) {
         super(props);
         this.row = props.row;
         this.col = props.col;
+        this.pos = props.collectionPos;
+        this.handleDrag = this.handleDrag.bind(this);
+    }
+
+    // Handles the dragging of the mouse over a node.
+    handleDrag() {
+        if (this.props.clickedFlag) {
+            this.props.algorithmVisualizer.grid[this.row][this.col].setWall();
+            document.getElementsByClassName("square")[this.pos].style.background = "black";
+        }
     }
 
     render() {
         return (
-            <div className="square"></div>
+            <div className="square" onMouseEnter={this.handleDrag}></div>
         );
     }
 }

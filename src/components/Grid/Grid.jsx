@@ -3,20 +3,40 @@
  */
 
 import "./Grid.css"
-import React from "react"
+import React, { useState } from "react"
 import Square from "./Square"
 
 // External representation of the algorithm visualizer.
 function Grid(props) {
+    // State regarding the clicking of an element inside the grid
+    const [clicked, setClicked] = useState(false);
+
+    const handleClick = () => setClicked(!clicked);
+
+    // Counter definition.
+    function Counter() {
+        this.value = -1;
+    }
+
+    // Increments the value held by "Counter".
+    Counter.prototype.increment = function() { this.value++; };
+
+    // Keeps track of the current id value
+    var counter = new Counter();
+
     return (
         <div className="visualizer">
-            <ul className="grid">
+            <ul className="grid" onClick={handleClick}>
                 {props.algorithmVisualizer.grid.map((gridRow, index) => {
                     return (
                         <li>
                             <div key={index}>
                                 {gridRow.map((node) => {
-                                    return <Square row={node.row} col={node.col}/>
+                                    // Next node position
+                                    counter.increment();
+                                    return <Square clickedFlag={clicked}
+                                            algorithmVisualizer={props.algorithmVisualizer}
+                                            row={node.row} col={node.col} collectionPos={counter.value}/>
                                 })}
                             </div>
                         </li>
@@ -26,7 +46,5 @@ function Grid(props) {
         </div>
     );
 }
-
-// <Square row={node.row} col={node.col}/>
 
 export default Grid;

@@ -1,5 +1,5 @@
 .square {
-    color: white;
+    background: white;
     border-color: rgb(116, 152, 219);
     border-style: solid;
     border-width: thin;
@@ -8,6 +8,6 @@
 }
 
 .square:hover {
-    color: rgb(165, 165, 165);
-    transition: all 0.2s ease-out;
+    background: rgb(235, 235, 235);
+    transition: all 0.1s ease-out;
 }
