@@ -20,7 +20,14 @@ class Square extends Component {
         this.row = props.row;
         this.col = props.col;
         this.pos = props.collectionPos;
+        this.handleClick = this.handleClick.bind(this);
         this.handleDrag = this.handleDrag.bind(this);
+    }
+
+    // Handles the clicking of a node.
+    handleClick() {
+        this.props.algorithmVisualizer.grid[this.row][this.col].setWall();
+        document.getElementsByClassName("square")[this.pos].style.background = "black";
     }
 
     // Handles the dragging of the mouse over a node.
@@ -33,7 +40,7 @@ class Square extends Component {
 
     render() {
         return (
-            <div className="square" onMouseEnter={this.handleDrag}></div>
+            <div className="square" onClick={this.handleClick} onMouseEnter={this.handleDrag}></div>
         );
     }
 }
