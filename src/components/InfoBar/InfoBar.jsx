@@ -1,3 +1,6 @@
+/**
+    Information bar component, under the navigation bar, implementation.
+*/
 import "./InfoBar.css"
 import React from "react"
 

@@ -1,3 +1,7 @@
+/**
+    Dropdown menu component implementation.
+*/
+
 import "./Dropdown.css"
 import React, { useState } from "react"
 import { DropdownItems } from "./DropdownItems"

@@ -1,3 +1,7 @@
+/**
+    Navigation bar component implementation.
+*/
+
 import "./NavBar.css"
 import React, { useState } from "react"
 import Dropdown from "../Dropdown/Dropdown"

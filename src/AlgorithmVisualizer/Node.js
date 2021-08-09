@@ -21,6 +21,11 @@ class Node {
         this.col = col;
     }
 
+    // Color getter
+    get getColor() {
+        return this.color;
+    }
+
     // Setting the states of a node.
 
     setWhite() {
