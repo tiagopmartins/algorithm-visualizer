@@ -1,24 +1,33 @@
-/*
- * File containing the definition of the Node class.
- */
+/**
+    File containing the definition of the Node class.
+*/
 
 // Colors (states) a node can have.
 
 // Untouched state.
 const WHITE = 0;
 // Start node state.
-const RED = 1;
+const BLUE = 1;
 // End node state.
-const GREEN = 2;
+const PURPLE = 2;
 // Wall node state.
 const BLACK = 3;
 
 // Node class to represent a node in a graph.
 class Node {
-    constructor(color, row, col) {
+    /*
+     * Constructor.
+     *
+     * @param color Node color
+     * @param row Node row.
+     * @param col Node col.
+     * @param pos Position of the node in the array returned by "getElementsByClassName".
+     */
+    constructor(color, row, col, pos) {
         this.color = color;
         this.row = row;
         this.col = col;
+        this.pos = pos;
     }
 
     // Color getter
@@ -26,18 +35,18 @@ class Node {
         return this.color;
     }
 
-    // Setting the states of a node.
+    // Setting the colors (states) of a node.
 
     setWhite() {
         this.color = WHITE;
     }
 
     setStart() {
-        this.color = RED;
+        this.color = BLUE;
     }
 
     setEnd() {
-        this.color = GREEN;
+        this.color = PURPLE;
     }
 
     setWall() {

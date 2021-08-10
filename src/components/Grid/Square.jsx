@@ -28,8 +28,7 @@ class Square extends Component {
     handleClick() {
         if (this.props.isStart) {
             // Set the node to the start point
-            this.props.algorithmVisualizer.grid[this.row][this.col].setStart();
-            document.getElementsByClassName("square")[this.pos].style.background = "rgb(43, 76, 185)";
+            this.props.algorithmVisualizer.setStartNode(this.row, this.col);
             // Only one start node, next is the end node
             this.props.setIsStart(false);
             this.props.setIsEnd(true);
@@ -37,17 +36,14 @@ class Square extends Component {
 
         else if (this.props.isEnd) {
             // Set the node to the end point
-            this.props.algorithmVisualizer.grid[this.row][this.col].setEnd();
-            document.getElementsByClassName("square")[this.pos].style.background = "rgb(118, 4, 224)";
+            this.props.algorithmVisualizer.setEndNode(this.row, this.col);
             // Only one end node, next are the wall nodes
             this.props.setIsEnd(false);
             this.props.setIsWall(true);
         }
 
-        else {  // Is a wall
-            this.props.algorithmVisualizer.grid[this.row][this.col].setWall();
-            document.getElementsByClassName("square")[this.pos].style.background = "rgb(80, 80, 80)";
-        }
+        else    // Is a wall
+            this.props.algorithmVisualizer.setWallNode(this.row, this.col);
     }
 
     // Handles the dragging of the mouse over a node.
@@ -56,8 +52,7 @@ class Square extends Component {
             this.props.algorithmVisualizer.grid[this.row][this.col].color != 1 &&       // if it isnt already the start or end node
             this.props.algorithmVisualizer.grid[this.row][this.col].color != 2) {
 
-            this.props.algorithmVisualizer.grid[this.row][this.col].setWall();
-            document.getElementsByClassName("square")[this.pos].style.background = "rgb(80, 80, 80)";
+            this.props.algorithmVisualizer.setWallNode(this.row, this.col);
         }
     }
 
