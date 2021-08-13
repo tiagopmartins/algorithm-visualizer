@@ -13,6 +13,9 @@ const PURPLE = 2;
 // Wall node state.
 const BLACK = 3;
 
+// Color an expored node has.
+const EXPLORED_COLOR = "rgb(51, 153, 255)";
+
 // Node class to represent a node in a graph.
 class Node {
     /*
@@ -22,17 +25,24 @@ class Node {
      * @param row Node row.
      * @param col Node col.
      * @param pos Position of the node in the array returned by "getElementsByClassName".
+     * @param visited Flag to know if a the node was visited during an algorithm.
      */
     constructor(color, row, col, pos) {
         this.color = color;
         this.row = row;
         this.col = col;
         this.pos = pos;
+        this.visited = false;
     }
 
-    // Color getter
+    // Getters
+
     get getColor() {
         return this.color;
+    }
+
+    getExploredColor() {
+        return EXPLORED_COLOR;
     }
 
     // Setting the colors (states) of a node.
@@ -51,6 +61,22 @@ class Node {
 
     setWall() {
         this.color = BLACK;
+    }
+
+    setVisited(bool) {
+        this.visited = bool;
+    }
+
+    isWall() {
+        return this.getColor() == BLACK;
+    }
+
+    isEnd() {
+        return this.getColor() == PURPLE;
+    }
+
+    isVisited() {
+        return this.visited;
     }
 }
 

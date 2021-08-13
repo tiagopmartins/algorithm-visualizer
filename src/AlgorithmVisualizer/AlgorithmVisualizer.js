@@ -29,6 +29,16 @@ class AlgorithmVisualizer {
         }
     }
 
+    // Getters
+
+    get getStartNode() {
+        return this.startNode;
+    }
+
+    get getEndNode() {
+        return this.endNode;
+    }
+
     /*
      * Sets the start node.
      *
@@ -36,7 +46,7 @@ class AlgorithmVisualizer {
      * @param col Start node's column.
      */
     setStartNode(row, col) {
-        this.startNode = [row, col];
+        this.startNode = this.grid[row][col];
         this.grid[row][col].setStart();
         document.getElementsByClassName("square")[this.grid[row][col].pos].style.background = "rgb(43, 76, 185)";
     }
@@ -48,7 +58,7 @@ class AlgorithmVisualizer {
      * @param col End node's column.
      */
     setEndNode(row, col) {
-        this.endNode = [row, col];
+        this.endNode = this.grid[row][col];
         this.grid[row][col].setEnd();
         document.getElementsByClassName("square")[this.grid[row][col].pos].style.background = "rgb(118, 4, 224)";
     }
@@ -73,7 +83,7 @@ class AlgorithmVisualizer {
      * 
      * @return Array with copies of the nodes.
      */
-    getAdjacentNodes(row, col) {
+    getNeighbours(row, col) {
         // Node not on the outline of the grid
         if (row > 0 && row < this.height && col > 0 && col < this.width)
             return [this.grid[row][col - 1],
@@ -136,6 +146,14 @@ class AlgorithmVisualizer {
                     this.grid[row - 1][col],
                     null,
                     this.grid[row + 1][col]];
+    }
+
+    // Resets the visited flag on every node.
+    resetVisitedFlag() {
+        for (let i = 0; i < this.width; i++) {
+            for (let j = 0; j < this.height; j++)
+                this.grid[i][j].setVisited(false);
+        }
     }
 }
 
