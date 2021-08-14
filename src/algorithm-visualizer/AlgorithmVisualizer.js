@@ -75,6 +75,16 @@ class AlgorithmVisualizer {
     }
 
     /*
+     * Resets every node present in the grid.
+     */
+    clearGrid() {
+        for (let i = 0; i < this.width; i++) {
+            for (let j = 0; j < this.height; j++)
+                this.grid[i][j].reset();
+        }
+    }
+
+    /*
      * Gets the adjacent nodes of a given node.
      * Order: [left, up, right, down].
      *
@@ -92,20 +102,20 @@ class AlgorithmVisualizer {
                     this.grid[row + 1][col]];
 
         // Node on the upper outline
-        else if (row == 0) {
+        else if (row === 0) {
             if (col > 0 && col < this.width)
                 return [this.grid[row][col - 1],
                         null,
                         this.grid[row][col + 1],
                         this.grid[row + 1][col]];
 
-            else if (col == 0)
+            else if (col === 0)
                 return [null,
                         null,
                         this.grid[row][col + 1],
                         this.grid[row + 1][col]];
 
-            else if (col == this.width - 1)
+            else if (col === this.width - 1)
                 return [this.grid[row][col - 1],
                         null,
                         null,
@@ -113,20 +123,20 @@ class AlgorithmVisualizer {
         }
 
         // Node on the inferior outline
-        else if (row == this.height - 1) {
+        else if (row === this.height - 1) {
             if (col > 0 && col < this.width)
                 return [this.grid[row][col - 1],
                         this.grid[row - 1][col],
                         this.grid[row][col + 1],
                         null];
 
-            else if (col == 0)
+            else if (col === 0)
                 return [null,
                         this.grid[row - 1][col],
                         this.grid[row][col + 1],
                         null];
 
-            else if (col == this.width - 1)
+            else if (col === this.width - 1)
                 return [this.grid[row][col - 1],
                         this.grid[row - 1][col],
                         null,
@@ -134,14 +144,14 @@ class AlgorithmVisualizer {
         }
 
         // Node on the left outline but not on the horizontal outlines
-        else if (col == 0 && row > 0 && row < this.height)
+        else if (col === 0 && row > 0 && row < this.height)
             return [null,
                     this.grid[row - 1][col],
                     this.grid[row][col + 1],
                     this.grid[row + 1][col]];
 
         // Node on the right edge but not on the horizontal outlines
-        else if (col == this.width - 1 && row > 0 && row < this.height)
+        else if (col === this.width - 1 && row > 0 && row < this.height)
             return [this.grid[row][col - 1],
                     this.grid[row - 1][col],
                     null,

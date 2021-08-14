@@ -26,7 +26,7 @@
     display: grid;
     grid-template-columns: repeat(4, auto);
     grid-column-gap: 3rem;
-    margin-left: 8rem;
+    margin-left: 8.2rem;
     list-style: none;
     text-align: center;
     justify-content: center;

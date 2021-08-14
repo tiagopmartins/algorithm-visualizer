@@ -2,9 +2,9 @@ import './App.css';
 import React, { useState } from 'react';
 import NavBar from "./components/NavBar/NavBar"
 import InfoBar from "./components/InfoBar/InfoBar"
-import { AlgorithmsInfo } from './Algorithms/AlgorithmsInfo';
+import { AlgorithmsInfo } from './algorithms/AlgorithmsInfo';
 import Grid from "./components/Grid/Grid"
-import AlgorithmVisualizer from "./AlgorithmVisualizer/AlgorithmVisualizer"
+import AlgorithmVisualizer from "./algorithm-visualizer/AlgorithmVisualizer"
 
 // Website title
 const TITLE = "AlgoVis";
@@ -18,6 +18,12 @@ function App() {
 
   // State regarding the algorithm in use
   const [algorithmInUse, setAlgorithmInUse] = useState(AlgorithmsInfo["A_Star"]);
+  // State regarding the clicking of an element inside the grid
+  const [gridClicked, setGridClicked] = useState(false);
+  // States regarding the node selection
+  const [isStart, setIsStart] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+  const [isWall, setIsWall] = useState(false);
 
   // Internal grid
   var algorithmVisualizer = new AlgorithmVisualizer(VIS_HEIGHT, VIS_WIDTH);
@@ -25,8 +31,14 @@ function App() {
   return (
     <div className="App">
       <NavBar algorithmInUse={algorithmInUse} setAlgorithmInUse={setAlgorithmInUse}/>
-      <InfoBar algorithmInUse={algorithmInUse} setAlgorithmInUse={setAlgorithmInUse}/>
-      <Grid algorithmVisualizer={algorithmVisualizer}/>
+
+      <InfoBar algorithmVisualizer={algorithmVisualizer} algorithmInUse={algorithmInUse}
+               setAlgorithmInUse={setAlgorithmInUse} setIsStart={setIsStart}
+               setIsEnd={setIsEnd} setIsWall={setIsWall}/>
+               
+      <Grid algorithmVisualizer={algorithmVisualizer} gridClicked={gridClicked}
+            setGridClicked={setGridClicked} isStart={isStart} setIsStart={setIsStart}
+            isEnd={isEnd} setIsEnd={setIsEnd} isWall={isWall} setIsWall={setIsWall}/>
     </div>
   );
 }

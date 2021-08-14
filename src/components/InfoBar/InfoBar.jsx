@@ -3,9 +3,31 @@
 */
 import "./InfoBar.css"
 import React from "react"
+import { BFS } from "../../algorithms/BFS"
 
 // Information bar
 function InfoBar(props) {
+    // Script to run when the "Start" button is pressed.
+    function startButton() {
+        BFS(props.algorithmVisualizer);
+    }
+
+    // Script to run when the "Clear" button is pressed.
+    function clearButton() {
+        // Clearing the internal representation
+        props.algorithmVisualizer.clearGrid();
+
+        // Clearing the visualization
+        let squares = document.getElementsByClassName("square");
+        for (let i = 0; i < squares.length; i++)
+            squares[i].style.background = "white";
+
+        // Reseting the states
+        props.setIsStart(true);
+        props.setIsEnd(false);
+        props.setIsWall(false);
+    }
+
     return (
         <div className="infobar">
             <ul className="infobar-menu">
@@ -13,16 +35,16 @@ function InfoBar(props) {
                     <text className="infobar-el-text"><b>{props.algorithmInUse.name}</b></text>
                 </li>
                 <li key="1">
-                    <a className="infobar-el" href="">Start</a>
+                    <button className="infobar-el" onClick={startButton}>Start</button>
                 </li>
                 <li key="2">
-                    <a className="infobar-el" href="">Clear</a>
+                    <button className="infobar-el" onClick={clearButton}>Clear</button>
                 </li>
                 <li key="3">
-                    <a className="infobar-el" href="">About</a>
+                    <button className="infobar-el">About</button>
                 </li>
                 <li key="4">
-                    <a className="infobar-el" href="">View Code</a>
+                    <button className="infobar-el">View Code</button>
                 </li>
             </ul>
         </div>

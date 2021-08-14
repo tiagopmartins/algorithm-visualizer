@@ -7,14 +7,15 @@
  *
  * @param algorithmVisualizer AlgorithmVisualizer object.
  */
-function BFS(algorithmVisualizer) {
+export function BFS(algorithmVisualizer) {
     // Reseting the visited flag on every node
     algorithmVisualizer.resetVisitedFlag();
 
     // Array of the node elements present in the webpage
     var webpageNodes = document.getElementsByClassName("square");
 
-    var queue = [algorithmVisualizer.grid.getStartNode()];
+    var startNodePosition = algorithmVisualizer.startNode;
+    var queue = [algorithmVisualizer.grid[startNodePosition[0]][startNodePosition[1]]];
     
     // Current node being explored
     var current = null;

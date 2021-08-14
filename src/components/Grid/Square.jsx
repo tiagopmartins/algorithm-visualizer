@@ -48,9 +48,9 @@ class Square extends Component {
 
     // Handles the dragging of the mouse over a node.
     handleDrag() {
-        if (this.props.clickedFlag && this.props.isWall &&                              // Grid was clicked and the node will be a wall
-            this.props.algorithmVisualizer.grid[this.row][this.col].color != 1 &&       // if it isnt already the start or end node
-            this.props.algorithmVisualizer.grid[this.row][this.col].color != 2) {
+        if (this.props.clickedFlag && this.props.isWall &&                               // Grid was clicked and the node will be a wall
+            this.props.algorithmVisualizer.grid[this.row][this.col].color !== 1 &&       // if it isnt already the start or end node
+            this.props.algorithmVisualizer.grid[this.row][this.col].color !== 2) {
 
             this.props.algorithmVisualizer.setWallNode(this.row, this.col);
         }

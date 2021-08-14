@@ -8,15 +8,8 @@ import Square from "./Square"
 
 // External representation of the algorithm visualizer.
 function Grid(props) {
-    // State regarding the clicking of an element inside the grid
-    const [clicked, setClicked] = useState(false);
-    // States regarding the node selection
-    const [isStart, setIsStart] = useState(true);
-    const [isEnd, setIsEnd] = useState(false);
-    const [isWall, setIsWall] = useState(false);
-
     // Handles the clicking of the grid
-    const handleClick = () => setClicked(!clicked);
+    const handleClick = () => props.setGridClicked(!props.gridClicked);
 
     // Counter definition.
     function Counter() {
@@ -39,8 +32,8 @@ function Grid(props) {
                                 {gridRow.map((node) => {
                                     // Next node position
                                     counter.increment();
-                                    return <Square clickedFlag={clicked} isStart={isStart} isEnd={isEnd} isWall={isWall}
-                                            setIsStart={setIsStart} setIsEnd={setIsEnd} setIsWall={setIsWall}
+                                    return <Square clickedFlag={props.gridClicked} isStart={props.isStart} isEnd={props.isEnd} isWall={props.isWall}
+                                            setIsStart={props.setIsStart} setIsEnd={props.setIsEnd} setIsWall={props.setIsWall}
                                             algorithmVisualizer={props.algorithmVisualizer}
                                             row={node.row} col={node.col} collectionPos={counter.value}/>
                                 })}

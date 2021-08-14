@@ -5,7 +5,7 @@
 import "./Dropdown.css"
 import React, { useState } from "react"
 import { DropdownItems } from "./DropdownItems"
-import { AlgorithmsInfo } from "../../Algorithms/AlgorithmsInfo"
+import { AlgorithmsInfo } from "../../algorithms/AlgorithmsInfo"
 
 function Dropdown(props) {
     const [clicked, setClicked] = useState(false);

@@ -68,15 +68,20 @@ class Node {
     }
 
     isWall() {
-        return this.getColor() == BLACK;
+        return this.getColor() === BLACK;
     }
 
     isEnd() {
-        return this.getColor() == PURPLE;
+        return this.getColor() === PURPLE;
     }
 
     isVisited() {
         return this.visited;
+    }
+
+    reset() {
+        this.setWhite();
+        this.setVisited(false);
     }
 }
 
