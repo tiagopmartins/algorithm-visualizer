@@ -3,15 +3,37 @@
 */
 import "./InfoBar.css"
 import React from "react"
+import { AlgorithmsInfo } from '../../algorithms/AlgorithmsInfo';
+import { a_star } from "../../algorithms/a-star"
+import { bellman_ford } from "../../algorithms/bellman-ford"
 import { BFS } from "../../algorithms/BFS"
+import { DFS } from "../../algorithms/DFS"
+import { dijkstras } from "../../algorithms/dijkstras"
 
 // Information bar
 function InfoBar(props) {
     // Script to run when the "Start" button is pressed.
     function startButton() {
-        if (!props.isEnd) {
-            props.setIsWall(false);
-            BFS(props.algorithmVisualizer);
+        if (!props.isStart && !props.isEnd) {
+            props.setIsWall(false);     // Prevents bugs
+
+            // Selecting the algortihm
+            
+            if (props.algorithmInUse === AlgorithmsInfo.A_Star)
+                a_star(props.algorithmVisualizer);
+
+            else if (props.algorithmInUse === AlgorithmsInfo.Bellman_Ford)
+                bellman_ford(props.algorithmVisualizer);
+
+            else if (props.algorithmInUse === AlgorithmsInfo.BFS)
+                BFS(props.algorithmVisualizer);
+
+            else if (props.algorithmInUse === AlgorithmsInfo.DFS)
+                DFS(props.algorithmVisualizer);
+
+            else if (props.algorithmInUse === AlgorithmsInfo.Dijkstras)
+                dijkstras(props.algorithmVisualizer);
+
         }
     }
 

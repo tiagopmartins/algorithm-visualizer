@@ -17,9 +17,6 @@ export async function BFS(algorithmVisualizer) {
     var queue = [algorithmVisualizer.startNode];
     algorithmVisualizer.startNode.setVisited(true);
 
-    /*console.log(algorithmVisualizer.endNode);
-    console.log(algorithmVisualizer.grid[algorithmVisualizer.endNode.col][algorithmVisualizer.endNode.row]);*/
-
     // Current node being explored
     var current = null;
     while (queue.length) {      // Length > 0, queue not empty
