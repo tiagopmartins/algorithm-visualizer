@@ -9,7 +9,10 @@ import { BFS } from "../../algorithms/BFS"
 function InfoBar(props) {
     // Script to run when the "Start" button is pressed.
     function startButton() {
-        BFS(props.algorithmVisualizer);
+        if (!props.isEnd) {
+            props.setIsWall(false);
+            BFS(props.algorithmVisualizer);
+        }
     }
 
     // Script to run when the "Clear" button is pressed.

@@ -21,46 +21,43 @@ class Node {
     /*
      * Constructor.
      *
-     * @param color Node color
-     * @param row Node row.
+     * @param color Node color.
      * @param col Node col.
+     * @param row Node row.
      * @param pos Position of the node in the array returned by "getElementsByClassName".
-     * @param visited Flag to know if a the node was visited during an algorithm.
      */
-    constructor(color, row, col, pos) {
+    constructor(color, col, row, pos) {
         this.color = color;
-        this.row = row;
         this.col = col;
+        this.row = row;
         this.pos = pos;
-        this.visited = false;
-    }
-
-    // Getters
-
-    get getColor() {
-        return this.color;
+        this.visited = false;   // flag to know if a the node was visited during an algorithm
     }
 
     getExploredColor() {
         return EXPLORED_COLOR;
     }
 
-    // Setting the colors (states) of a node.
+    // Setters
+
+    set setColor(color) {
+        this.color = color;
+    }
 
     setWhite() {
-        this.color = WHITE;
+        this.setColor = WHITE;
     }
 
     setStart() {
-        this.color = BLUE;
+        this.setColor = BLUE;
     }
 
     setEnd() {
-        this.color = PURPLE;
+        this.setColor = PURPLE;
     }
 
     setWall() {
-        this.color = BLACK;
+        this.setColor = BLACK;
     }
 
     setVisited(bool) {
@@ -68,11 +65,15 @@ class Node {
     }
 
     isWall() {
-        return this.getColor() === BLACK;
+        return this.color === BLACK;
+    }
+
+    isStart() {
+        return this.color === BLUE;
     }
 
     isEnd() {
-        return this.getColor() === PURPLE;
+        return this.color === PURPLE;
     }
 
     isVisited() {

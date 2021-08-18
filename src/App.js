@@ -13,6 +13,9 @@ const VIS_HEIGHT = 33;
 // Width of the visualizer (in squares).
 const VIS_WIDTH = 72;
 
+// Main algorithm visualizer. Internal representation.
+var algorithmVisualizer = new AlgorithmVisualizer(VIS_HEIGHT, VIS_WIDTH);
+
 function App() {
   document.title = TITLE;
 
@@ -25,9 +28,6 @@ function App() {
   const [isEnd, setIsEnd] = useState(false);
   const [isWall, setIsWall] = useState(false);
 
-  // Internal grid
-  var algorithmVisualizer = new AlgorithmVisualizer(VIS_HEIGHT, VIS_WIDTH);
-
   return (
     <div className="App">
       <NavBar algorithmInUse={algorithmInUse} setAlgorithmInUse={setAlgorithmInUse}/>
@@ -35,7 +35,7 @@ function App() {
       <InfoBar algorithmVisualizer={algorithmVisualizer} algorithmInUse={algorithmInUse}
                setAlgorithmInUse={setAlgorithmInUse} setIsStart={setIsStart}
                setIsEnd={setIsEnd} setIsWall={setIsWall}/>
-               
+
       <Grid algorithmVisualizer={algorithmVisualizer} gridClicked={gridClicked}
             setGridClicked={setGridClicked} isStart={isStart} setIsStart={setIsStart}
             isEnd={isEnd} setIsEnd={setIsEnd} isWall={isWall} setIsWall={setIsWall}/>

@@ -3,7 +3,7 @@
 */
 
 import "./Grid.css"
-import React, { useState } from "react"
+import React from "react"
 import Square from "./Square"
 
 // External representation of the algorithm visualizer.
@@ -32,8 +32,10 @@ function Grid(props) {
                                 {gridRow.map((node) => {
                                     // Next node position
                                     counter.increment();
-                                    return <Square clickedFlag={props.gridClicked} isStart={props.isStart} isEnd={props.isEnd} isWall={props.isWall}
-                                            setIsStart={props.setIsStart} setIsEnd={props.setIsEnd} setIsWall={props.setIsWall}
+                                    return <Square clickedFlag={props.gridClicked}
+                                            isStart={props.isStart} isEnd={props.isEnd}
+                                            isWall={props.isWall} setIsStart={props.setIsStart}
+                                            setIsEnd={props.setIsEnd} setIsWall={props.setIsWall}
                                             algorithmVisualizer={props.algorithmVisualizer}
                                             row={node.row} col={node.col} collectionPos={counter.value}/>
                                 })}

@@ -13,12 +13,9 @@ class AlgorithmVisualizer {
      * @param width Grid's width.
      */
     constructor(height, width) {
+        this.control = 0;
         this.height = height;
         this.width = width;
-        // Start node row and column
-        this.startNode = [];
-        // End node row and column
-        this.endNode = [];
         // Internal grid (1D)
         this.grid = Array.from(Array(width), () => new Array(height));
 
@@ -29,49 +26,41 @@ class AlgorithmVisualizer {
         }
     }
 
-    // Getters
-
-    get getStartNode() {
-        return this.startNode;
-    }
-
-    get getEndNode() {
-        return this.endNode;
-    }
-
     /*
      * Sets the start node.
      *
-     * @param row Start node's row.
-     * @param col Start node's column.
+     * @param col Start node's row.
+     * @param row Start node's column.
      */
-    setStartNode(row, col) {
-        this.startNode = this.grid[row][col];
-        this.grid[row][col].setStart();
-        document.getElementsByClassName("square")[this.grid[row][col].pos].style.background = "rgb(43, 76, 185)";
+    setStartNode(col, row) {
+        // Start node row and column
+        AlgorithmVisualizer.prototype.startNode = this.grid[col][row];
+        this.grid[col][row].setStart();
+        document.getElementsByClassName("square")[this.grid[col][row].pos].style.background = "rgb(43, 76, 185)";
     }
 
     /*
      * Sets the end node.
      *
-     * @param row End node's row.
-     * @param col End node's column.
+     * @param col End node's row.
+     * @param row End node's column.
      */
-    setEndNode(row, col) {
-        this.endNode = this.grid[row][col];
-        this.grid[row][col].setEnd();
-        document.getElementsByClassName("square")[this.grid[row][col].pos].style.background = "rgb(118, 4, 224)";
+    setEndNode(col, row) {
+        // End node row and column
+        AlgorithmVisualizer.prototype.endNode = this.grid[col][row];
+        this.grid[col][row].setEnd();
+        document.getElementsByClassName("square")[this.grid[col][row].pos].style.background = "rgb(118, 4, 224)";
     }
 
     /*
      * Sets a wall node.
      *
-     * @param row Wall node's row.
-     * @param col Wall node's column.
+     * @param col Wall node's row.
+     * @param row Wall node's column.
      */
-    setWallNode(row, col) {
-        this.grid[row][col].setWall();
-        document.getElementsByClassName("square")[this.grid[row][col].pos].style.background = "rgb(80, 80, 80)";
+    setWallNode(col, row) {
+        this.grid[col][row].setWall();
+        document.getElementsByClassName("square")[this.grid[col][row].pos].style.background = "rgb(80, 80, 80)";
     }
 
     /*
@@ -86,76 +75,76 @@ class AlgorithmVisualizer {
 
     /*
      * Gets the adjacent nodes of a given node.
-     * Order: [left, up, right, down].
+     * Order: [up, right, down, left].
      *
-     * @param row Node's row.
      * @param col Node's column.
+     * @param row Node's row.
      * 
      * @return Array with copies of the nodes.
      */
-    getNeighbours(row, col) {
+    getNeighbours(col, row) {
         // Node not on the outline of the grid
-        if (row > 0 && row < this.height && col > 0 && col < this.width)
-            return [this.grid[row][col - 1],
-                    this.grid[row - 1][col],
-                    this.grid[row][col + 1],
-                    this.grid[row + 1][col]];
+        if (row > 0 && row < (this.height - 1) && col > 0 && col < (this.width - 1))
+            return [this.grid[col][row - 1],
+                    this.grid[col + 1][row],
+                    this.grid[col][row + 1],
+                    this.grid[col - 1][row]];
 
         // Node on the upper outline
         else if (row === 0) {
-            if (col > 0 && col < this.width)
-                return [this.grid[row][col - 1],
-                        null,
-                        this.grid[row][col + 1],
-                        this.grid[row + 1][col]];
+            if (col > 0 && col < (this.width - 1))
+                return [null,
+                        this.grid[col + 1][row],
+                        this.grid[col][row + 1],
+                        this.grid[col - 1][row]];
 
             else if (col === 0)
                 return [null,
-                        null,
-                        this.grid[row][col + 1],
-                        this.grid[row + 1][col]];
+                        this.grid[col + 1][row],
+                        this.grid[col][row + 1],
+                        null];
 
             else if (col === this.width - 1)
-                return [this.grid[row][col - 1],
+                return [null,
                         null,
-                        null,
-                        this.grid[row + 1][col]];
+                        this.grid[col][row + 1],
+                        this.grid[col - 1][row]];
         }
 
         // Node on the inferior outline
-        else if (row === this.height - 1) {
-            if (col > 0 && col < this.width)
-                return [this.grid[row][col - 1],
-                        this.grid[row - 1][col],
-                        this.grid[row][col + 1],
-                        null];
+        else if (row === (this.height - 1)) {
+            if (col > 0 && col < (this.width - 1))
+                return [this.grid[col][row - 1],
+                        this.grid[col + 1][row],
+                        null,
+                        this.grid[col - 1][row]];
 
             else if (col === 0)
-                return [null,
-                        this.grid[row - 1][col],
-                        this.grid[row][col + 1],
-                        null];
-
-            else if (col === this.width - 1)
-                return [this.grid[row][col - 1],
-                        this.grid[row - 1][col],
+                return [this.grid[col][row - 1],
+                        this.grid[col + 1][row],
                         null,
                         null];
+
+            else if (col === (this.width - 1))
+                return [this.grid[col][row - 1],
+                        null,
+                        null,
+                        this.grid[col - 1][row]];
         }
 
         // Node on the left outline but not on the horizontal outlines
-        else if (col === 0 && row > 0 && row < this.height)
-            return [null,
-                    this.grid[row - 1][col],
-                    this.grid[row][col + 1],
-                    this.grid[row + 1][col]];
+        else if (col === 0 && row > 0 && row < (this.height - 1))
+            return [this.grid[col][row - 1],
+                    this.grid[col + 1][row],
+                    this.grid[col][row + 1],
+                    null];
 
         // Node on the right edge but not on the horizontal outlines
-        else if (col === this.width - 1 && row > 0 && row < this.height)
-            return [this.grid[row][col - 1],
-                    this.grid[row - 1][col],
+        else if (col === (this.width - 1) && row > 0 && row < (this.height - 1))
+            return [this.grid[col][row - 1],
                     null,
-                    this.grid[row + 1][col]];
+                    this.grid[col][row + 1],
+                    this.grid[col - 1][row]];
     }
 
     // Resets the visited flag on every node.

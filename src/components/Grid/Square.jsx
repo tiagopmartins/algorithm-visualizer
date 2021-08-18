@@ -28,7 +28,7 @@ class Square extends Component {
     handleClick() {
         if (this.props.isStart) {
             // Set the node to the start point
-            this.props.algorithmVisualizer.setStartNode(this.row, this.col);
+            this.props.algorithmVisualizer.setStartNode(this.col, this.row);
             // Only one start node, next is the end node
             this.props.setIsStart(false);
             this.props.setIsEnd(true);
@@ -36,23 +36,23 @@ class Square extends Component {
 
         else if (this.props.isEnd) {
             // Set the node to the end point
-            this.props.algorithmVisualizer.setEndNode(this.row, this.col);
+            this.props.algorithmVisualizer.setEndNode(this.col, this.row);
             // Only one end node, next are the wall nodes
             this.props.setIsEnd(false);
             this.props.setIsWall(true);
         }
 
-        else    // Is a wall
-            this.props.algorithmVisualizer.setWallNode(this.row, this.col);
+        else if (this.props.isWall)
+            this.props.algorithmVisualizer.setWallNode(this.col, this.row);
     }
 
     // Handles the dragging of the mouse over a node.
     handleDrag() {
         if (this.props.clickedFlag && this.props.isWall &&                               // Grid was clicked and the node will be a wall
-            this.props.algorithmVisualizer.grid[this.row][this.col].color !== 1 &&       // if it isnt already the start or end node
-            this.props.algorithmVisualizer.grid[this.row][this.col].color !== 2) {
+            !this.props.algorithmVisualizer.grid[this.col][this.row].isStart() &&       // if it isnt already the start or end node
+            !this.props.algorithmVisualizer.grid[this.col][this.row].isEnd()) {
 
-            this.props.algorithmVisualizer.setWallNode(this.row, this.col);
+            this.props.algorithmVisualizer.setWallNode(this.col, this.row);
         }
     }
 

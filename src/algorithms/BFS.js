@@ -7,16 +7,19 @@
  *
  * @param algorithmVisualizer AlgorithmVisualizer object.
  */
-export function BFS(algorithmVisualizer) {
+export async function BFS(algorithmVisualizer) {
     // Reseting the visited flag on every node
     algorithmVisualizer.resetVisitedFlag();
 
     // Array of the node elements present in the webpage
-    var webpageNodes = document.getElementsByClassName("square");
+    var squares = document.getElementsByClassName("square");
 
-    var startNodePosition = algorithmVisualizer.startNode;
-    var queue = [algorithmVisualizer.grid[startNodePosition[0]][startNodePosition[1]]];
-    
+    var queue = [algorithmVisualizer.startNode];
+    algorithmVisualizer.startNode.setVisited(true);
+
+    /*console.log(algorithmVisualizer.endNode);
+    console.log(algorithmVisualizer.grid[algorithmVisualizer.endNode.col][algorithmVisualizer.endNode.row]);*/
+
     // Current node being explored
     var current = null;
     while (queue.length) {      // Length > 0, queue not empty
@@ -26,16 +29,23 @@ export function BFS(algorithmVisualizer) {
         if (current.isEnd())
             return true;
 
-        webpageNodes[current.pos].style.color = current.getExploredColor();
+        if (!current.isStart() && !current.isEnd() && !current.isWall())
+            squares[current.pos].style.background = current.getExploredColor();
 
         // Next nodes to explore
-        var neighbours = algorithmVisualizer.getNeighbours(current.row, current.col);
-        for (let i = 0; i < neighbours.length; i++) {
-            if (!neighbours[i].isWall() && !neighbours[i].isVisited())
-                queue.push(neighbours[i]);
-        }
+        var neighbours = algorithmVisualizer.getNeighbours(current.col, current.row);
 
-        current.setVisited(true);
+        for (let i = 0; i < neighbours.length; i++) {
+            // Is a valid node, isnt a wall and isnt visited
+            if (neighbours[i] !== null && neighbours[i] !== undefined &&
+                !neighbours[i].isWall() && !neighbours[i].isVisited()) {
+                queue.push(neighbours[i]);
+                neighbours[i].setVisited(true);
+
+                // Delay on the exploration
+                await new Promise(r => setTimeout(r, 10));
+            }
+        }
     }
 
     // End node not found
