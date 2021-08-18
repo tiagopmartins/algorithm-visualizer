@@ -8,11 +8,11 @@
  * @param algorithmVisualizer AlgorithmVisualizer object.
  */
 export async function BFS(algorithmVisualizer) {
-    // Reseting the visited flag on every node
-    algorithmVisualizer.resetVisitedFlag();
-
     // Array of the node elements present in the webpage
     var squares = document.getElementsByClassName("square");
+
+    // Promises made
+    var promises = new Array();
 
     var queue = [algorithmVisualizer.startNode];
     algorithmVisualizer.startNode.setVisited(true);
@@ -24,7 +24,7 @@ export async function BFS(algorithmVisualizer) {
 
         // Arrived at the end node
         if (current.isEnd())
-            return true;
+            return promises;
 
         if (!current.isStart() && !current.isEnd() && !current.isWall())
             squares[current.pos].style.background = current.getExploredColor();
@@ -40,11 +40,11 @@ export async function BFS(algorithmVisualizer) {
                 neighbours[i].setVisited(true);
 
                 // Delay on the exploration
-                await new Promise(r => setTimeout(r, 10));
+                promises.push(await new Promise(r => setTimeout(r, 10)));
             }
         }
     }
 
     // End node not found
-    return false;
+    return promises;
 }

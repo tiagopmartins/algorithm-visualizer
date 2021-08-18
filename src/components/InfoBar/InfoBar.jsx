@@ -14,36 +14,51 @@ import { dijkstras } from "../../algorithms/dijkstras"
 function InfoBar(props) {
 
     // Script to run when the "Start" button is pressed.
-    function startButton() {
-        if (!props.isStart && !props.isEnd) {
+    async function startButton() {
+        if (!props.isStart && !props.isEnd && !props.ongoing) {
             props.setIsWall(false);     // Prevents bugs
+            props.setOngoing(true);     // Currently an algorithm is running
+
+            // Existing promises
+            var promises;
 
             // Selecting the algortihm
             
             if (props.algorithmInUse === AlgorithmsInfo.A_Star)
-                a_star(props.algorithmVisualizer);
+                promises = a_star(props.algorithmVisualizer);
 
             else if (props.algorithmInUse === AlgorithmsInfo.Bellman_Ford)
-                bellman_ford(props.algorithmVisualizer);
+                promises = bellman_ford(props.algorithmVisualizer);
 
             else if (props.algorithmInUse === AlgorithmsInfo.BFS)
-                BFS(props.algorithmVisualizer);
+                promises = BFS(props.algorithmVisualizer);
 
             else if (props.algorithmInUse === AlgorithmsInfo.DFS)
-                DFS(props.algorithmVisualizer);
+                promises = DFS(props.algorithmVisualizer);
 
             else if (props.algorithmInUse === AlgorithmsInfo.Dijkstras)
-                dijkstras(props.algorithmVisualizer);
+                promises = dijkstras(props.algorithmVisualizer);
 
-            backtrackPath(props.algorithmVisualizer.startNode.col,
-                          props.algorithmVisualizer.startNode.row,
-                          props.algorithmVisualizer.endNode.col,
-                          props.algorithmVisualizer.endNode.row);
+            // Waits for the BFS to finish
+            await Promise.allSettled([promises]);
+
+            promises = backtrackPath(props.algorithmVisualizer.startNode.col,
+                                     props.algorithmVisualizer.startNode.row,
+                                     props.algorithmVisualizer.endNode.col,
+                                     props.algorithmVisualizer.endNode.row);
+            
+            // Waits for the backtracking to finish
+            await Promise.allSettled([promises]);
+
+            props.setOngoing(false);    // No algorithm running
         }
     }
 
     // Script to run when the "Clear" button is pressed.
     function clearButton() {
+        if (props.ongoing)      // Algorithm ongoing
+            return;
+
         // Clearing the internal representation
         props.algorithmVisualizer.clearGrid();
 
@@ -59,13 +74,17 @@ function InfoBar(props) {
     }
 
     // Finds the path from the start node to the end node
+    // (cheat backtrack, merely for vizualization purposes)
     async function backtrackPath(startCol, startRow, endCol, endRow) {
         // Frontend squares
         let squares = document.getElementsByClassName("square");
 
+        // Promises made
+        var promises = new Array();
+
         // Current column and row
-        let currCol = endCol;
-        let currRow = endRow >= startRow ? endRow - 1 : endRow + 1;
+        let currCol = endRow != startRow ? endCol : (endCol > startCol ? endCol - 1 : endCol + 1);
+        let currRow = endRow != startRow ? (endRow > startRow ? endRow - 1 : endRow + 1) : endRow;
 
         // Painting color
         let color = props.algorithmVisualizer.grid[currCol][currRow].getBacktrackColor();
@@ -77,7 +96,7 @@ function InfoBar(props) {
             while (currRow > startRow) {
                 squares[props.algorithmVisualizer.grid[currCol][currRow].pos].style.background = color;
                 currRow--;
-                await new Promise(r => setTimeout(r, 10));
+                promises.push(await new Promise(r => setTimeout(r, 10)));
             }
         }
 
@@ -86,7 +105,7 @@ function InfoBar(props) {
             while (currRow < startRow) {
                 squares[props.algorithmVisualizer.grid[currCol][currRow].pos].style.background = color;
                 currRow++;
-                await new Promise(r => setTimeout(r, 10));
+                promises.push(await new Promise(r => setTimeout(r, 10)));
             }
         }
 
@@ -95,7 +114,7 @@ function InfoBar(props) {
             while (currCol > startCol) {
                 squares[props.algorithmVisualizer.grid[currCol][currRow].pos].style.background = color;
                 currCol--;
-                await new Promise(r => setTimeout(r, 10));
+                promises.push(await new Promise(r => setTimeout(r, 10)));
             }
         }
 
@@ -104,9 +123,11 @@ function InfoBar(props) {
             while (currCol < startCol) {
                 squares[props.algorithmVisualizer.grid[currCol][currRow].pos].style.background = color;
                 currCol++;
-                await new Promise(r => setTimeout(r, 10));
+                promises.push(await new Promise(r => setTimeout(r, 10)));
             }
         }
+
+        return promises;
     }
 
     return (
