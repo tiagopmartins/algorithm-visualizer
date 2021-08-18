@@ -36,6 +36,7 @@ class AlgorithmVisualizer {
         // Start node row and column
         AlgorithmVisualizer.prototype.startNode = this.grid[col][row];
         this.grid[col][row].setStart();
+        // CSS styling
         document.getElementsByClassName("square")[this.grid[col][row].pos].style.background = "rgb(43, 76, 185)";
     }
 
@@ -49,6 +50,7 @@ class AlgorithmVisualizer {
         // End node row and column
         AlgorithmVisualizer.prototype.endNode = this.grid[col][row];
         this.grid[col][row].setEnd();
+        // CSS styling
         document.getElementsByClassName("square")[this.grid[col][row].pos].style.background = "rgb(118, 4, 224)";
     }
 
@@ -60,6 +62,7 @@ class AlgorithmVisualizer {
      */
     setWallNode(col, row) {
         this.grid[col][row].setWall();
+        // CSS styling
         document.getElementsByClassName("square")[this.grid[col][row].pos].style.background = "rgb(80, 80, 80)";
     }
 

@@ -14,7 +14,9 @@ const PURPLE = 2;
 const BLACK = 3;
 
 // Color an expored node has.
-const EXPLORED_COLOR = "rgb(51, 153, 255)";
+const EXPLORED_COLOR = "#577AFF";
+// Color used for the backtracking of the path.
+const BACKTRACK_COLOR = "#FFCD00";
 
 // Node class to represent a node in a graph.
 class Node {
@@ -36,6 +38,10 @@ class Node {
 
     getExploredColor() {
         return EXPLORED_COLOR;
+    }
+
+    getBacktrackColor() {
+        return BACKTRACK_COLOR;
     }
 
     // Setters
