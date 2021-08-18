@@ -21,6 +21,8 @@ function App() {
 
   // State regarding the algorithm in use
   const [algorithmInUse, setAlgorithmInUse] = useState(AlgorithmsInfo["A_Star"]);
+  // State to tell if the visualizer is ready to use
+  const [ready, setReady] = useState(true);
   // State to tell if there is an algorithm ongoing
   const [ongoing, setOngoing] = useState(false);
   // State regarding the clicking of an element inside the grid
@@ -37,7 +39,7 @@ function App() {
       <InfoBar algorithmVisualizer={algorithmVisualizer} algorithmInUse={algorithmInUse}
                setAlgorithmInUse={setAlgorithmInUse} isStart={isStart} setIsStart={setIsStart}
                isEnd={isEnd} setIsEnd={setIsEnd} setIsWall={setIsWall} ongoing={ongoing}
-               setOngoing={setOngoing}/>
+               setOngoing={setOngoing} ready={ready} setReady={setReady}/>
 
       <Grid algorithmVisualizer={algorithmVisualizer} gridClicked={gridClicked}
             setGridClicked={setGridClicked} isStart={isStart} setIsStart={setIsStart}

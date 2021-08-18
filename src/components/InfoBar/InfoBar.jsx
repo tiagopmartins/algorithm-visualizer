@@ -5,7 +5,6 @@ import "./InfoBar.css"
 import React from "react"
 import { AlgorithmsInfo } from '../../algorithms/AlgorithmsInfo';
 import { a_star } from "../../algorithms/a-star"
-import { bellman_ford } from "../../algorithms/bellman-ford"
 import { BFS } from "../../algorithms/BFS"
 import { DFS } from "../../algorithms/DFS"
 import { dijkstras } from "../../algorithms/dijkstras"
@@ -17,6 +16,7 @@ function InfoBar(props) {
     async function startButton() {
         if (!props.isStart && !props.isEnd && !props.ongoing) {
             props.setIsWall(false);     // Prevents bugs
+            props.setReady(false);
             props.setOngoing(true);     // Currently an algorithm is running
 
             // Existing promises
@@ -26,9 +26,6 @@ function InfoBar(props) {
             
             if (props.algorithmInUse === AlgorithmsInfo.A_Star)
                 promises = a_star(props.algorithmVisualizer);
-
-            else if (props.algorithmInUse === AlgorithmsInfo.Bellman_Ford)
-                promises = bellman_ford(props.algorithmVisualizer);
 
             else if (props.algorithmInUse === AlgorithmsInfo.BFS)
                 promises = BFS(props.algorithmVisualizer);
@@ -58,6 +55,8 @@ function InfoBar(props) {
     function clearButton() {
         if (props.ongoing)      // Algorithm ongoing
             return;
+
+        props.setReady(true);   // Grid ready again
 
         // Clearing the internal representation
         props.algorithmVisualizer.clearGrid();
@@ -141,12 +140,6 @@ function InfoBar(props) {
                 </li>
                 <li key="2">
                     <button className="infobar-el" onClick={clearButton}>Clear</button>
-                </li>
-                <li key="3">
-                    <button className="infobar-el">About</button>
-                </li>
-                <li key="4">
-                    <button className="infobar-el">View Code</button>
                 </li>
             </ul>
         </div>

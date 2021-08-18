@@ -6,7 +6,6 @@ A website deidicated to an intuitive, simple and clean `algorithm visualizer` fo
 
 On this website, it is possible to see in action and learn about the following algorithms:
 - A* Search;
-- Bellman-Ford;
 - BFS;
 - DFS;
 - Dijkstra's.

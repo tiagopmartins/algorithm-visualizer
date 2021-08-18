@@ -3,9 +3,6 @@ export const AlgorithmsInfo = {
     A_Star: {
         name: "A* Search"
     },
-    Bellman_Ford: {
-        name: "Bellman-Ford"
-    },
     BFS: {
         name: "BFS"
     },

@@ -5,10 +5,6 @@ export const DropdownItems = [
         className: "dropdown-el"
     },
     {
-        key: "Bellman_Ford",
-        className: "dropdown-el"
-    },
-    {
         key: "BFS",
         className: "dropdown-el"
     },
