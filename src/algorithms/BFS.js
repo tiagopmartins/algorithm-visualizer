@@ -38,6 +38,7 @@ export async function BFS(algorithmVisualizer) {
                 !neighbours[i].isWall() && !neighbours[i].isVisited()) {
                 queue.push(neighbours[i]);
                 neighbours[i].setVisited(true);
+                neighbours[i].previous = current;
 
                 // Delay on the exploration
                 promises.push(await new Promise(r => setTimeout(r, 10)));

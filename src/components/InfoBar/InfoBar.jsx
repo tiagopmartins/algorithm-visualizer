@@ -39,10 +39,7 @@ function InfoBar(props) {
             // Waits for the BFS to finish
             await Promise.allSettled([promises]);
 
-            promises = backtrackPath(props.algorithmVisualizer.startNode.col,
-                                     props.algorithmVisualizer.startNode.row,
-                                     props.algorithmVisualizer.endNode.col,
-                                     props.algorithmVisualizer.endNode.row);
+            promises = backtrackPath();
             
             // Waits for the backtracking to finish
             await Promise.allSettled([promises]);
@@ -72,58 +69,21 @@ function InfoBar(props) {
         props.setIsWall(false);
     }
 
-    // Finds the path from the start node to the end node
-    // (cheat backtrack, merely for vizualization purposes)
-    async function backtrackPath(startCol, startRow, endCol, endRow) {
+    // Finds the path from the start node to the end node.
+    async function backtrackPath() {
         // Frontend squares
         let squares = document.getElementsByClassName("square");
-
         // Promises made
         var promises = new Array();
-
-        // Current column and row
-        let currCol = endRow != startRow ? endCol : (endCol > startCol ? endCol - 1 : endCol + 1);
-        let currRow = endRow != startRow ? (endRow > startRow ? endRow - 1 : endRow + 1) : endRow;
-
+        // Current node being backtracked
+        var current = props.algorithmVisualizer.endNode.previous;
         // Painting color
-        let color = props.algorithmVisualizer.grid[currCol][currRow].getBacktrackColor();
+        let color = props.algorithmVisualizer.grid[current.col][current.row].getBacktrackColor();
 
-        // Painting the path
-
-        // End node visually below the start node
-        if (endRow >= startRow) {
-            while (currRow > startRow) {
-                squares[props.algorithmVisualizer.grid[currCol][currRow].pos].style.background = color;
-                currRow--;
-                promises.push(await new Promise(r => setTimeout(r, 10)));
-            }
-        }
-
-        // End node visually above the start node
-        else {
-            while (currRow < startRow) {
-                squares[props.algorithmVisualizer.grid[currCol][currRow].pos].style.background = color;
-                currRow++;
-                promises.push(await new Promise(r => setTimeout(r, 10)));
-            }
-        }
-
-        // End node to the right of the start node
-        if (endCol >= startCol) {
-            while (currCol > startCol) {
-                squares[props.algorithmVisualizer.grid[currCol][currRow].pos].style.background = color;
-                currCol--;
-                promises.push(await new Promise(r => setTimeout(r, 10)));
-            }
-        }
-
-        // End node to the left of the start node
-        else {
-            while (currCol < startCol) {
-                squares[props.algorithmVisualizer.grid[currCol][currRow].pos].style.background = color;
-                currCol++;
-                promises.push(await new Promise(r => setTimeout(r, 10)));
-            }
+        while (current != props.algorithmVisualizer.startNode) {
+            squares[current.pos].style.background = color;
+            current = current.previous;
+            promises.push(await new Promise(r => setTimeout(r, 10)));
         }
 
         return promises;
