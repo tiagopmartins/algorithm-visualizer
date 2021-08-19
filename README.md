@@ -30,5 +30,9 @@ And that's it!
 3. The third click enables the wall drawing (NO HOLDING THE BUTTON NEEDED)
 4. The fourth click disables the wall drawing
 
+## Additional Information
+
+This was a fun project for me to learn more about React and Javascript. With this, no big optimizations were done, although there is room for that. Enjoy!
+
 ## License
 MIT
