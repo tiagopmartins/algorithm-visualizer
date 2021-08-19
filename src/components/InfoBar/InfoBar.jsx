@@ -1,6 +1,7 @@
 /**
     Information bar component, under the navigation bar, implementation.
 */
+
 import "./InfoBar.css"
 import React from "react"
 import { AlgorithmsInfo } from '../../algorithms/AlgorithmsInfo';
@@ -13,7 +14,7 @@ function InfoBar(props) {
 
     // Script to run when the "Start" button is pressed.
     async function startButton() {
-        if (!props.isStart && !props.isEnd && !props.ongoing) {
+        if (!props.isStart && !props.isEnd && !props.ongoing && props.ready) {
             props.setIsWall(false);     // Prevents bugs
             props.setReady(false);
             props.setOngoing(true);     // Currently an algorithm is running
