@@ -13,7 +13,7 @@ On this website, it is possible to see in action and learn about the following a
 
 Firstly, you'll need Node.js and npm installed. Use your package manager to install Node.js and then use Node.js to install npm.
 Secondly, run the following on your command line:
-> git clone https://github.com/tiagopmartins/algorithm-visualizer.git <insert_your_directory>
+> git clone https://github.com/tiagopmartins/algorithm-visualizer.git
 
 > cd <your_directory>
 
