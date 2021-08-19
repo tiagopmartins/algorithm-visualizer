@@ -17,6 +17,8 @@ const BLACK = 3;
 const EXPLORED_COLOR = "#4775FF";
 // Color used for the backtracking of the path.
 const BACKTRACK_COLOR = "#F6AE2D";
+// Rainbow colors (first --> last)
+const RAINBOW = ["#9400D3", "#4B0082", "#0000FF", "#00FF00", "#FFFF00", "#FF7F00", "#FF0000"];
 
 // Node class to represent a node in a graph.
 class Node {
@@ -35,10 +37,18 @@ class Node {
         this.pos = pos;
         this.visited = false;   // Flag to know if a the node was visited during an algorithm
         this.previous = null;   // Copy of the previous node in the path
+        this.g_value = 0;       // A* variable. Current cost to reach the end node
+        this.h_value = 0;       // A* variable. Estimated cost from the current node to the end node
+        this.f_value = 0;       // A* variable. f_value = g_value + h_value
+        this.rainbowColorN = 0; // Index of the rainbow color to use
     }
 
     getExploredColor() {
         return EXPLORED_COLOR;
+    }
+
+    getRainbowColors() {
+        return RAINBOW;
     }
 
     getBacktrackColor() {
@@ -90,6 +100,10 @@ class Node {
     reset() {
         this.setWhite();
         this.setVisited(false);
+        this.previous = null;
+        this.g_value = 0;
+        this.h_value = 0;
+        this.f_value = 0;
     }
 }
 

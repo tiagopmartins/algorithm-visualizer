@@ -11,9 +11,5 @@ export const DropdownItems = [
     {
         key: "DFS",
         className: "dropdown-el"
-    },
-    {
-        key: "Dijkstras",
-        className: "dropdown-el"
-    },
+    }
 ];

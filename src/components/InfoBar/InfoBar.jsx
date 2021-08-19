@@ -7,7 +7,6 @@ import { AlgorithmsInfo } from '../../algorithms/AlgorithmsInfo';
 import { a_star } from "../../algorithms/a-star"
 import { BFS } from "../../algorithms/BFS"
 import { DFS } from "../../algorithms/DFS"
-import { dijkstras } from "../../algorithms/dijkstras"
 
 // Information bar
 function InfoBar(props) {
@@ -32,9 +31,6 @@ function InfoBar(props) {
 
             else if (props.algorithmInUse === AlgorithmsInfo.DFS)
                 promises = DFS(props.algorithmVisualizer);
-
-            else if (props.algorithmInUse === AlgorithmsInfo.Dijkstras)
-                promises = dijkstras(props.algorithmVisualizer);
 
             // Waits for the BFS to finish
             await Promise.allSettled([promises]);

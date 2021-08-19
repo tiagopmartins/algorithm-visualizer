@@ -8,8 +8,5 @@ export const AlgorithmsInfo = {
     },
     DFS: {
         name: "DFS"
-    },
-    Dijkstras: {
-        name: "Dijkstra's"
-    },
+    }
 };
