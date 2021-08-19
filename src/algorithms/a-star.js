@@ -6,8 +6,9 @@
  * A* algorithm.
  *
  * @param algorithmVisualizer AlgorithmVisualizer object.
+ * @param rainbowActivated Boolean.
  */
-export async function a_star(algorithmVisualizer) {
+export async function a_star(algorithmVisualizer, rainbowActivated) {
 
     /*
      * Returns the node with the lowest f value in the open list
@@ -87,6 +88,10 @@ export async function a_star(algorithmVisualizer) {
     var squares = document.getElementsByClassName("square");
     // Color of the explored nodes
     let color = algorithmVisualizer.endNode.getExploredColor();
+    // Rainbow colors
+    const RAINBOW = algorithmVisualizer.endNode.getRainbowColors();
+    // Current color index
+    var colorN = 0;
     // Promises made
     var promises = new Array();
     // List of nodes to visit
@@ -106,8 +111,15 @@ export async function a_star(algorithmVisualizer) {
         if (current.isEnd())
             return promises;
 
-        if (!current.isStart() && !current.isEnd() && !current.isWall())
-            squares[current.pos].style.background = color;
+        if (!current.isStart() && !current.isEnd() && !current.isWall()) {
+            if (rainbowActivated) {
+                squares[current.pos].style.background = RAINBOW[current.rainbowColorN];
+                colorN = (colorN + 1) % RAINBOW.length;
+            }
+
+            else
+                squares[current.pos].style.background = color;
+        }
         
         // Next nodes to explore
         var neighbours = algorithmVisualizer.getNeighbours(current.col, current.row);
@@ -128,6 +140,7 @@ export async function a_star(algorithmVisualizer) {
                     neighbours[i].g_value = current.g_value + DIST;
                     neighbours[i].f_value = neighbours[i].g_value + neighbours[i].h_value;
                     neighbours[i].previous = current;
+                    neighbours[i].rainbowColorN = (current.rainbowColorN + 1) % RAINBOW.length;
                     openList.push(neighbours[i]);
                 }
             }

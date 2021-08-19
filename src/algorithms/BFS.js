@@ -6,18 +6,17 @@
  * Iterative BFS algorithm.
  *
  * @param algorithmVisualizer AlgorithmVisualizer object.
+ * @param rainbowActivated Boolean.
  */
-export async function BFS(algorithmVisualizer) {
+export async function BFS(algorithmVisualizer, rainbowActivated) {
     // Array of the node elements present in the webpage
     var squares = document.getElementsByClassName("square");
-    // Color of the explored nodes
-    //let color = algorithmVisualizer.endNode.getExploredColor();
-    
+    // Color of the explored nodes when NOT using the rainbow mode
+    const exploredColor = algorithmVisualizer.endNode.getExploredColor();
     // Rainbow colors
     const RAINBOW = algorithmVisualizer.endNode.getRainbowColors();
     // Current color index
     var colorN = 0;
-
     // Promises made
     var promises = new Array();
 
@@ -34,8 +33,13 @@ export async function BFS(algorithmVisualizer) {
             return promises;
 
         if (!current.isStart() && !current.isEnd() && !current.isWall()) {
-            squares[current.pos].style.background = rainbow[colorN];
-            colorN = (colorN + 1) % RAINBOW.length;
+            if (rainbowActivated) {
+                squares[current.pos].style.background = RAINBOW[current.rainbowColorN];
+                colorN = (colorN + 1) % RAINBOW.length;
+            }
+
+            else
+                squares[current.pos].style.background = exploredColor;
         }
 
         // Next nodes to explore
@@ -48,6 +52,7 @@ export async function BFS(algorithmVisualizer) {
                 queue.push(neighbours[i]);
                 neighbours[i].setVisited(true);
                 neighbours[i].previous = current;
+                neighbours[i].rainbowColorN = (current.rainbowColorN + 1) % RAINBOW.length;
 
                 // Delay on the exploration
                 promises.push(await new Promise(r => setTimeout(r, 10)));

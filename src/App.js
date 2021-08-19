@@ -31,6 +31,8 @@ function App() {
   const [isStart, setIsStart] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
   const [isWall, setIsWall] = useState(false);
+  // Rainbow colors activated
+  const [rainbowActivated, setRainbowActivated] = useState(false);
 
   return (
     <div className="App">
@@ -39,7 +41,8 @@ function App() {
       <InfoBar algorithmVisualizer={algorithmVisualizer} algorithmInUse={algorithmInUse}
                setAlgorithmInUse={setAlgorithmInUse} isStart={isStart} setIsStart={setIsStart}
                isEnd={isEnd} setIsEnd={setIsEnd} setIsWall={setIsWall} ongoing={ongoing}
-               setOngoing={setOngoing} ready={ready} setReady={setReady}/>
+               setOngoing={setOngoing} ready={ready} setReady={setReady}
+               rainbowActivated={rainbowActivated} setRainbowActivated={setRainbowActivated}/>
 
       <Grid algorithmVisualizer={algorithmVisualizer} gridClicked={gridClicked}
             setGridClicked={setGridClicked} isStart={isStart} setIsStart={setIsStart}

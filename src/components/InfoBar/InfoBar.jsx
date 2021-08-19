@@ -24,13 +24,13 @@ function InfoBar(props) {
             // Selecting the algortihm
             
             if (props.algorithmInUse === AlgorithmsInfo.A_Star)
-                promises = a_star(props.algorithmVisualizer);
+                promises = a_star(props.algorithmVisualizer, props.rainbowActivated);
 
             else if (props.algorithmInUse === AlgorithmsInfo.BFS)
-                promises = BFS(props.algorithmVisualizer);
+                promises = BFS(props.algorithmVisualizer, props.rainbowActivated);
 
             else if (props.algorithmInUse === AlgorithmsInfo.DFS)
-                promises = DFS(props.algorithmVisualizer);
+                promises = DFS(props.algorithmVisualizer, props.rainbowActivated);
 
             // Waits for the BFS to finish
             await Promise.allSettled([promises]);
@@ -73,11 +73,13 @@ function InfoBar(props) {
         var promises = new Array();
         // Current node being backtracked
         var current = props.algorithmVisualizer.endNode.previous;
-        // Painting color
-        let color = props.algorithmVisualizer.grid[current.col][current.row].getBacktrackColor();
+        // Painting color for the nodes when NOT using the rainbow mode
+        const color = props.algorithmVisualizer.grid[current.col][current.row].getBacktrackColor();
+        // Painting color for the nodes when using the rainbow mode
+        const rainbowExploredColor = props.algorithmVisualizer.grid[current.col][current.row].getRainbowBacktrackColor();
 
         while (current != props.algorithmVisualizer.startNode) {
-            squares[current.pos].style.background = color;
+            squares[current.pos].style.background = (props.rainbowActivated) ? rainbowExploredColor : color;
             current = current.previous;
             promises.push(await new Promise(r => setTimeout(r, 10)));
         }

@@ -6,12 +6,17 @@
  * Iterative DFS algorithm.
  *
  * @param algorithmVisualizer AlgorithmVisualizer object.
+ * @param rainbowActivated Boolean.
  */
-export async function DFS(algorithmVisualizer) {
+export async function DFS(algorithmVisualizer, rainbowActivated) {
     // Array of the node elements present in the webpage
     var squares = document.getElementsByClassName("square");
     // Color of the explored nodes
     let color = algorithmVisualizer.endNode.getExploredColor();
+    // Rainbow colors
+    const RAINBOW = algorithmVisualizer.endNode.getRainbowColors();
+    // Current color index
+    var colorN = 0;
     // Promises made
     var promises = new Array();
 
@@ -29,8 +34,15 @@ export async function DFS(algorithmVisualizer) {
         if (current.isEnd())
             return promises;
 
-        if (!current.isStart() && !current.isEnd() && !current.isWall())
-            squares[current.pos].style.background = color;
+        if (!current.isStart() && !current.isEnd() && !current.isWall()) {
+            if (rainbowActivated) {
+                squares[current.pos].style.background = RAINBOW[current.rainbowColorN];
+                colorN = (colorN + 1) % RAINBOW.length;
+            }
+
+            else
+                squares[current.pos].style.background = color;
+        }
         
         // Next nodes to explore
         var neighbours = algorithmVisualizer.getNeighbours(current.col, current.row);
@@ -41,6 +53,7 @@ export async function DFS(algorithmVisualizer) {
                 !neighbours[i].isWall() && !neighbours[i].isVisited()) {
                 stack.push(neighbours[i]);
                 neighbours[i].previous = current;
+                neighbours[i].rainbowColorN = (current.rainbowColorN + 1) % RAINBOW.length;
             }
         }
 

@@ -14,11 +14,13 @@ const PURPLE = 2;
 const BLACK = 3;
 
 // Color an expored node has.
-const EXPLORED_COLOR = "#4775FF";
-// Color used for the backtracking of the path.
+const EXPLORED_COLOR = "#4077FF";
+// Color used for the backtracking of the path when NOT using the rainbow mode.
 const BACKTRACK_COLOR = "#F6AE2D";
-// Rainbow colors (first --> last)
+// Rainbow colors (first --> last).
 const RAINBOW = ["#9400D3", "#4B0082", "#0000FF", "#00FF00", "#FFFF00", "#FF7F00", "#FF0000"];
+// Color used for the backtracking of the path when using the rainbow mode.
+const RAINBOW_BACKTRACK_COLOR = "#000000";
 
 // Node class to represent a node in a graph.
 class Node {
@@ -53,6 +55,10 @@ class Node {
 
     getBacktrackColor() {
         return BACKTRACK_COLOR;
+    }
+
+    getRainbowBacktrackColor() {
+        return RAINBOW_BACKTRACK_COLOR;
     }
 
     // Setters
